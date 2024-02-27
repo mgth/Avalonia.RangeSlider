@@ -321,14 +321,14 @@ public class RangeTrack : Control
 
         if (isVertical)
         {
-            lowerThumbOffset = effectiveTrackLength - (effectiveTrackLength * offsetLower / range);
-            upperThumbOffset = effectiveTrackLength * offsetUpper / range;
+            lowerThumbOffset = range==0?0:effectiveTrackLength - (effectiveTrackLength * offsetLower / range);
+            upperThumbOffset = range==0?0:effectiveTrackLength * offsetUpper / range;
             lowerThumbOffset += IsThumbOverlap ? 0 : thumbLength;
         }
         else
         {
-            lowerThumbOffset = effectiveTrackLength * offsetLower / range;
-            upperThumbOffset = effectiveTrackLength - (effectiveTrackLength * offsetUpper / range);
+            lowerThumbOffset = range==0?0:effectiveTrackLength * offsetLower / range;
+            upperThumbOffset = range==0?0:effectiveTrackLength - (effectiveTrackLength * offsetUpper / range);
             upperThumbOffset += IsThumbOverlap ? 0 : thumbLength;
         }
 
