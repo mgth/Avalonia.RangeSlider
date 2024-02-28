@@ -11,17 +11,17 @@ namespace RangeSlider.Avalonia.Controls.Primitives;
 [PseudoClasses(":vertical", ":horizontal")]
 public class RangeTrack : Control
 {
-    public static readonly DirectProperty<RangeTrack, double> MinimumProperty =
-        RangeBase.MinimumProperty.AddOwner<RangeTrack>(o => o.Minimum, (o, v) => o.Minimum = v);
+    public static readonly StyledProperty<double> MinimumProperty =
+        RangeBase.MinimumProperty.AddOwner<Track>();
 
-    public static readonly DirectProperty<RangeTrack, double> MaximumProperty =
-        RangeBase.MaximumProperty.AddOwner<RangeTrack>(o => o.Maximum, (o, v) => o.Maximum = v);
+    public static readonly StyledProperty<double> MaximumProperty =
+        RangeBase.MaximumProperty.AddOwner<Track>();
 
-    public static readonly DirectProperty<RangeTrack, double> LowerSelectedValueProperty =
-        RangeBase.LowerSelectedValueProperty.AddOwner<RangeTrack>(o => o.LowerSelectedValue, (o, v) => o.LowerSelectedValue = v);
+    public static readonly StyledProperty<double> LowerValueProperty =
+        RangeBase.LowerValueProperty.AddOwner<Track>();
 
-    public static readonly DirectProperty<RangeTrack, double> UpperSelectedValueProperty =
-        RangeBase.UpperSelectedValueProperty.AddOwner<RangeTrack>(o => o.UpperSelectedValue, (o, v) => o.UpperSelectedValue = v);
+    public static readonly StyledProperty<double> UpperValueProperty =
+        RangeBase.UpperValueProperty.AddOwner<Track>();
 
     public static readonly StyledProperty<double> ViewportSizeProperty =
         ScrollBar.ViewportSizeProperty.AddOwner<RangeTrack>();
@@ -47,10 +47,6 @@ public class RangeTrack : Control
     public static readonly StyledProperty<bool> IsThumbOverlapProperty =
         AvaloniaProperty.Register<RangeTrack, bool>(nameof(IsThumbOverlap));
 
-    private double _minimum;
-    private double _maximum = 100.0;
-    private double _lowerSelectedValue;
-    private double _upperSelectedValue;
 
     static RangeTrack()
     {
@@ -61,8 +57,8 @@ public class RangeTrack : Control
         AffectsArrange<RangeTrack>(
             MinimumProperty,
             MaximumProperty,
-            LowerSelectedValueProperty,
-            UpperSelectedValueProperty,
+            LowerValueProperty,
+            UpperValueProperty,
             IsThumbOverlapProperty,
             OrientationProperty);
     }
@@ -74,74 +70,74 @@ public class RangeTrack : Control
 
     public double Minimum
     {
-        get { return _minimum; }
-        set { SetAndRaise(MinimumProperty, ref _minimum, value); }
+        get => GetValue(MinimumProperty);
+        set => SetValue(MinimumProperty, value);
     }
 
     public double Maximum
     {
-        get { return _maximum; }
-        set { SetAndRaise(MaximumProperty, ref _maximum, value); }
+        get => GetValue(MaximumProperty);
+        set => SetValue(MaximumProperty, value);
     }
 
-    public double LowerSelectedValue
+    public double LowerValue
     {
-        get { return _lowerSelectedValue; }
-        set { SetAndRaise(LowerSelectedValueProperty, ref _lowerSelectedValue, value); }
+        get => GetValue(LowerValueProperty);
+        set => SetValue(LowerValueProperty, value);
     }
 
-    public double UpperSelectedValue
+    public double UpperValue
     {
-        get { return _upperSelectedValue; }
-        set { SetAndRaise(UpperSelectedValueProperty, ref _upperSelectedValue, value); }
+        get => GetValue(UpperValueProperty);
+        set => SetValue(UpperValueProperty, value);
     }
 
     public double ViewportSize
     {
-        get { return GetValue(ViewportSizeProperty); }
-        set { SetValue(ViewportSizeProperty, value); }
+        get => GetValue(ViewportSizeProperty);
+        set => SetValue(ViewportSizeProperty, value);
     }
 
     public Orientation Orientation
     {
-        get { return GetValue(OrientationProperty); }
-        set { SetValue(OrientationProperty, value); }
+        get => GetValue(OrientationProperty);
+        set => SetValue(OrientationProperty, value);
     }
 
     public Thumb LowerThumb
     {
-        get { return GetValue(LowerThumbProperty); }
-        set { SetValue(LowerThumbProperty, value); }
+        get => GetValue(LowerThumbProperty);
+        set => SetValue(LowerThumbProperty, value);
     }
 
     public Thumb UpperThumb
     {
-        get { return GetValue(UpperThumbProperty); }
-        set { SetValue(UpperThumbProperty, value); }
+        get => GetValue(UpperThumbProperty);
+        set => SetValue(UpperThumbProperty, value);
     }
 
     public RepeatButton BackgroundButton
     {
-        get { return GetValue(BackgroundButtonProperty); }
-        set { SetValue(BackgroundButtonProperty, value); }
+        get => GetValue(BackgroundButtonProperty);
+        set => SetValue(BackgroundButtonProperty, value);
     }
 
     public RepeatButton ForegroundButton
     {
-        get { return GetValue(ForegroundButtonProperty); }
-        set { SetValue(ForegroundButtonProperty, value); }
+        get => GetValue(ForegroundButtonProperty);
+        set => SetValue(ForegroundButtonProperty, value);
     }
 
     public bool IsDirectionReversed
     {
-        get { return GetValue(IsDirectionReversedProperty); }
-        set { SetValue(IsDirectionReversedProperty, value); }
+        get => GetValue(IsDirectionReversedProperty);
+        set => SetValue(IsDirectionReversedProperty, value);
     }
 
     public bool IsThumbOverlap
     {
-        get { return GetValue(IsThumbOverlapProperty); }
-        set { SetValue(IsThumbOverlapProperty, value); }
+        get => GetValue(IsThumbOverlapProperty);
+        set => SetValue(IsThumbOverlapProperty, value);
     }
 
     protected override Size MeasureOverride(Size availableSize)
@@ -303,8 +299,8 @@ public class RangeTrack : Control
         out double lowerThumbOffset, out double upperThumbOffset)
     {
         var range = Math.Max(0.0, Maximum - Minimum);
-        var offsetLower = Math.Min(range, LowerSelectedValue - Minimum);
-        var offsetUpper = Math.Min(range, Maximum - UpperSelectedValue);
+        var offsetLower = Math.Min(range, LowerValue - Minimum);
+        var offsetUpper = Math.Min(range, Maximum - UpperValue);
 
         // Compute thumbs size
         var sliderLength = isVertical ? arrangeSize.Height : arrangeSize.Width;
@@ -341,8 +337,8 @@ public class RangeTrack : Control
         out double lowerThumbOffset, out double upperThumbOffset)
     {
         var range = Math.Max(0.0, Maximum - Minimum);
-        var offsetLower = Math.Min(range, LowerSelectedValue - Minimum);
-        var offsetUpper = Math.Min(range, Maximum - UpperSelectedValue);
+        var offsetLower = Math.Min(range, LowerValue - Minimum);
+        var offsetUpper = Math.Min(range, Maximum - UpperValue);
         var extent = Math.Max(0.0, range) + viewportSize;
         var sliderLength = isVertical ? arrangeSize.Height : arrangeSize.Width;
         var thumbMinLength = 10.0;

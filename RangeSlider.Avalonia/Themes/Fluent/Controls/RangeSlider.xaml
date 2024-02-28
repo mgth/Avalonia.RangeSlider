@@ -8,7 +8,7 @@
 		<Border Width="350" Height="700">
 			<DockPanel LastChildFill="True">
 				<StackPanel DockPanel.Dock="Top">
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="True">
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="True">
 						<DataValidationErrors.Error>
 							<sys:Exception>
 								<x:Arguments>
@@ -17,19 +17,19 @@
 							</sys:Exception>
 						</DataValidationErrors.Error>
 					</local:RangeSlider>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="True" IsEnabled="False"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="True"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="False"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="BottomRight" IsThumbOverlap="True"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="BottomRight" IsThumbOverlap="False"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="True" IsEnabled="False"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="True"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="False"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="BottomRight" IsThumbOverlap="True"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="BottomRight" IsThumbOverlap="False"/>
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="True" Orientation="Vertical" IsEnabled="False"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="True" Orientation="Vertical"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="False" Orientation="Vertical"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="True" Orientation="Vertical" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="TopLeft"/>
-					<local:RangeSlider Minimum="0" Maximum="100" LowerSelectedValue="25" UpperSelectedValue="75" IsThumbOverlap="False" Orientation="Vertical" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="TopLeft"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="True" Orientation="Vertical" IsEnabled="False"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="True" Orientation="Vertical"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="False" Orientation="Vertical"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="True" Orientation="Vertical" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="TopLeft"/>
+					<local:RangeSlider Minimum="0" Maximum="100" LowerValue="25" UpperValue="75" IsThumbOverlap="False" Orientation="Vertical" TickFrequency="5" IsSnapToTickEnabled="True" TickPlacement="TopLeft"/>
 				</StackPanel>
 			</DockPanel>
 		</Border>
@@ -148,8 +148,8 @@
 												   Grid.ColumnSpan="3"
 												   Minimum="{TemplateBinding Minimum}"
 												   Maximum="{TemplateBinding Maximum}"
-												   LowerSelectedValue="{TemplateBinding LowerSelectedValue, Mode=TwoWay}"
-												   UpperSelectedValue="{TemplateBinding UpperSelectedValue, Mode=TwoWay}"
+												   LowerValue="{TemplateBinding LowerValue, Mode=TwoWay}"
+												   UpperValue="{TemplateBinding UpperValue, Mode=TwoWay}"
 												   IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
 												   Orientation="Horizontal"
 												   IsThumbOverlap="{TemplateBinding IsThumbOverlap}">
@@ -176,13 +176,13 @@
 												   Background="{DynamicResource SliderThumbBackground}"
 												   BorderThickness="0"
 												   Theme="{StaticResource FluentRangeSliderThumbTheme}"
-												   DataContext="{TemplateBinding LowerSelectedValue}"
+												   DataContext="{TemplateBinding LowerValue}"
 												   Classes="LowerThumbStyle" >
 												<FlyoutBase.AttachedFlyout>
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.LowerSelectedValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #PART_Track.LowerValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -199,13 +199,13 @@
 												   Background="{DynamicResource SliderThumbBackground}"
 												   BorderThickness="0"
 												   Theme="{StaticResource FluentRangeSliderThumbTheme}"
-												   DataContext="{TemplateBinding UpperSelectedValue}"
+												   DataContext="{TemplateBinding UpperValue}"
 												   Classes="UpperThumbStyle" >
 												<FlyoutBase.AttachedFlyout>
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.UpperSelectedValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #PART_Track.UpperValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -277,8 +277,8 @@
 												   Grid.ColumnSpan="1"
 												   Minimum="{TemplateBinding Minimum}"
 												   Maximum="{TemplateBinding Maximum}"
-												   LowerSelectedValue="{TemplateBinding LowerSelectedValue, Mode=TwoWay}"
-												   UpperSelectedValue="{TemplateBinding UpperSelectedValue, Mode=TwoWay}"
+												   LowerValue="{TemplateBinding LowerValue, Mode=TwoWay}"
+												   UpperValue="{TemplateBinding UpperValue, Mode=TwoWay}"
 												   IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
 												   Orientation="Vertical"
 												   IsThumbOverlap="{TemplateBinding IsThumbOverlap}">
@@ -305,13 +305,13 @@
 												   Background="{DynamicResource SliderThumbBackground}"
 												   BorderThickness="0"
 												   Theme="{StaticResource FluentRangeSliderThumbTheme}"
-												   DataContext="{TemplateBinding LowerSelectedValue}"
+												   DataContext="{TemplateBinding LowerValue}"
 												   Classes="LowerThumbStyle">
 												<FlyoutBase.AttachedFlyout>
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.LowerSelectedValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #PART_Track.LowerValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -328,13 +328,13 @@
 												   Background="{DynamicResource SliderThumbBackground}"
 												   BorderThickness="0"
 												   Theme="{StaticResource FluentRangeSliderThumbTheme}"
-												   DataContext="{TemplateBinding UpperSelectedValue}"
+												   DataContext="{TemplateBinding UpperValue}"
 												   Classes="UpperThumbStyle">
 												<FlyoutBase.AttachedFlyout>
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.UpperSelectedValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #PART_Track.UpperValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>

@@ -1,4 +1,6 @@
 ﻿using Avalonia;
+using Avalonia.Automation;
+using Avalonia.Automation.Peers;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -39,6 +41,10 @@ public enum ThumbFlyoutPlacement
 /// <summary>
 /// A control that lets the user select from a range of values by moving a Thumb control along a Track.
 /// </summary>
+[TemplatePart("PART_DecreaseButton", typeof(Button))]
+[TemplatePart("PART_IncreaseButton", typeof(Button))]
+[TemplatePart("PART_Track",          typeof(Track)/*, IsRequired = true*/)]
+
 [PseudoClasses(":vertical", ":horizontal", ":pressed")]
 public class RangeSlider : RangeBase
 {
@@ -156,9 +162,14 @@ public class RangeSlider : RangeBase
         PressedMixin.Attach<RangeSlider>();
         FocusableProperty.OverrideDefaultValue<RangeSlider>(true);
         OrientationProperty.OverrideDefaultValue(typeof(RangeSlider), Orientation.Horizontal);
+        Thumb.DragStartedEvent.AddClassHandler<RangeSlider>((x, e) => x.OnThumbDragStarted(e), RoutingStrategies.Bubble);
+        Thumb.DragCompletedEvent.AddClassHandler<RangeSlider>((x, e) => x.OnThumbDragCompleted(e),
+            RoutingStrategies.Bubble);
 
-        LowerSelectedValueProperty.OverrideMetadata<RangeSlider>(new DirectPropertyMetadata<double>(enableDataValidation: true));
-        UpperSelectedValueProperty.OverrideMetadata<RangeSlider>(new DirectPropertyMetadata<double>(enableDataValidation: true));
+        LowerValueProperty.OverrideMetadata<RangeSlider>(new(enableDataValidation: true));
+        UpperValueProperty.OverrideMetadata<RangeSlider>(new(enableDataValidation: true));
+
+        AutomationProperties.ControlTypeOverrideProperty.OverrideDefaultValue<Slider>(AutomationControlType.Slider);
 
         ThumbFlyoutPlacementProperty.Changed.AddClassHandler<RangeSlider>((x, e) => x.ThumbFlyoutPlacementChanged(e));
     }
@@ -317,11 +328,11 @@ public class RangeSlider : RangeBase
                 break;
 
             case Key.Home:
-                LowerSelectedValue = Minimum;
+                LowerValue = Minimum;
                 break;
 
             case Key.End:
-                UpperSelectedValue = Maximum;
+                UpperValue = Maximum;
                 break;
 
             default:
@@ -336,7 +347,7 @@ public class RangeSlider : RangeBase
     {
         if (direction == 0.0) return;
 
-        var value = LowerSelectedValue;
+        var value = LowerValue;
 
         // Find the next value by snapping
         var next = SnapToTick(Math.Max(Minimum, Math.Min(Maximum, value + direction)));
@@ -383,7 +394,7 @@ public class RangeSlider : RangeBase
         // Update if we've found a better value
         if (Math.Abs(next - value) > Tolerance)
         {
-            LowerSelectedValue = next;
+            LowerValue = next;
         }
     }
 
@@ -446,25 +457,25 @@ public class RangeSlider : RangeBase
             case TrackThumb.Upper:
             case TrackThumb.InnerUpper:
             case TrackThumb.OuterUpper:
-                UpperSelectedValue = SnapToTick(value);
+                UpperValue = SnapToTick(value);
                 break;
             case TrackThumb.Lower:
             case TrackThumb.InnerLower:
             case TrackThumb.OuterLower:
-                LowerSelectedValue = SnapToTick(value);
+                LowerValue = SnapToTick(value);
                 break;
             case TrackThumb.Both:
                 var delta = value - _previousValue;
                 
-                if ((Math.Abs(LowerSelectedValue - Minimum) <= Tolerance && delta <= 0d)
-                    || (Math.Abs(UpperSelectedValue - Maximum) <= Tolerance && delta >= 0d))
+                if ((Math.Abs(LowerValue - Minimum) <= Tolerance && delta <= 0d)
+                    || (Math.Abs(UpperValue - Maximum) <= Tolerance && delta >= 0d))
                     return;
 
                 if (!IsSnapToTickEnabled)
                 {
                     _previousValue = value;
-                    LowerSelectedValue += delta;
-                    UpperSelectedValue += delta;
+                    LowerValue += delta;
+                    UpperValue += delta;
                 }
                 else
                 {
@@ -472,8 +483,8 @@ public class RangeSlider : RangeBase
                     if (closestTick > 0d)
                     {
                         _previousValue = value;
-                        LowerSelectedValue += closestTick * Math.Sign(delta);
-                        UpperSelectedValue += closestTick * Math.Sign(delta);
+                        LowerValue += closestTick * Math.Sign(delta);
+                        UpperValue += closestTick * Math.Sign(delta);
                     }
                 }
                 break;
@@ -573,7 +584,7 @@ public class RangeSlider : RangeBase
 
     protected override void UpdateDataValidation(AvaloniaProperty property, BindingValueType state, Exception? error)
     {
-        if (property == LowerSelectedValueProperty || property == UpperSelectedValueProperty)
+        if (property == LowerValueProperty || property == UpperValueProperty)
         {
             DataValidationErrors.SetError(this, error);
         }
@@ -595,6 +606,25 @@ public class RangeSlider : RangeBase
             UpdatePseudoClasses(value);
         }
     }
+
+    /// <summary>
+    /// Called when user start dragging the <see cref="Thumb"/>.
+    /// </summary>
+    /// <param name="e"></param>
+    protected virtual void OnThumbDragStarted(VectorEventArgs e)
+    {
+        _isDragging = true;
+    }
+
+    /// <summary>
+    /// Called when user stop dragging the <see cref="Thumb"/>.
+    /// </summary>
+    /// <param name="e"></param>
+    protected virtual void OnThumbDragCompleted(VectorEventArgs e)
+    {
+        _isDragging = false;
+    }
+
 
     /// <summary>
     /// Snap the input 'value' to the closest tick.
