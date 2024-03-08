@@ -169,7 +169,7 @@ public class RangeSlider : RangeBase
         LowerValueProperty.OverrideMetadata<RangeSlider>(new(enableDataValidation: true));
         UpperValueProperty.OverrideMetadata<RangeSlider>(new(enableDataValidation: true));
 
-        AutomationProperties.ControlTypeOverrideProperty.OverrideDefaultValue<Slider>(AutomationControlType.Slider);
+        AutomationProperties.ControlTypeOverrideProperty.OverrideDefaultValue<RangeSlider>(AutomationControlType.Slider);
 
         ThumbFlyoutPlacementProperty.Changed.AddClassHandler<RangeSlider>((x, e) => x.ThumbFlyoutPlacementChanged(e));
     }
