@@ -298,9 +298,13 @@ public class RangeTrack : Control
         out double backgroundButtonLength, out double foregroundButtonLength,
         out double lowerThumbOffset, out double upperThumbOffset)
     {
+        // crash when UpperValue or LowerValue is NaN
+        var upperValue = double.IsNaN(UpperValue)?double.IsNaN(LowerValue)?Maximum:LowerValue:UpperValue;
+        var lowerValue = double.IsNaN(LowerValue)?double.IsNaN(UpperValue)?Minimum:UpperValue:LowerValue;
+
         var range = Math.Max(0.0, Maximum - Minimum);
-        var offsetLower = Math.Min(range, LowerValue - Minimum);
-        var offsetUpper = Math.Min(range, Maximum - UpperValue);
+        var offsetLower = Math.Min(range, lowerValue - Minimum);
+        var offsetUpper = Math.Min(range, Maximum - upperValue);
 
         // Compute thumbs size
         var sliderLength = isVertical ? arrangeSize.Height : arrangeSize.Width;
@@ -326,6 +330,11 @@ public class RangeTrack : Control
             lowerThumbOffset = range==0?0:effectiveTrackLength * offsetLower / range;
             upperThumbOffset = range==0?0:effectiveTrackLength - (effectiveTrackLength * offsetUpper / range);
             upperThumbOffset += IsThumbOverlap ? 0 : thumbLength;
+        }
+
+        if(double.IsNaN(lowerThumbOffset) || double.IsNaN(upperThumbOffset))
+        {
+
         }
 
         foregroundButtonLength = Math.Abs(upperThumbOffset - lowerThumbOffset);
