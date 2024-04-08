@@ -273,9 +273,9 @@ public class RangeSlider : RangeBase
 
         _lowerThumbBoundsChangedListener?.Dispose();
 
-        _track = e.NameScope.Get<RangeTrack>("PART_Track");
-        _lowerThumb = e.NameScope.Get<Thumb>("PART_LowerThumb");
-        _upperThumb = e.NameScope.Get<Thumb>("PART_UpperThumb");
+        _track = e.NameScope.Get<RangeTrack>("Part_Track");
+        _lowerThumb = e.NameScope.Get<Thumb>("Part_LowerThumb");
+        _upperThumb = e.NameScope.Get<Thumb>("Part_UpperThumb");
 
         ApplyThumbFlyoutPlacement(ThumbFlyoutPlacement);
 

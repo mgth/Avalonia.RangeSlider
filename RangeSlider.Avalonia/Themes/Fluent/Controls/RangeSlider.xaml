@@ -143,7 +143,7 @@
 											 Placement="Bottom"
 											 IsVisible="False"
 											 Fill="{DynamicResource SliderTickBarFill}" />
-									<lp:RangeTrack x:Name="PART_Track"
+									<lp:RangeTrack x:Name="Part_Track"
 												   Grid.Row="1"
 												   Grid.ColumnSpan="3"
 												   Minimum="{TemplateBinding Minimum}"
@@ -154,21 +154,21 @@
 												   Orientation="Horizontal"
 												   IsThumbOverlap="{TemplateBinding IsThumbOverlap}">
 										<lp:RangeTrack.BackgroundButton>
-											<RepeatButton x:Name="PART_BackgroundButton"
+											<RepeatButton x:Name="Part_BackgroundButton"
 														  Theme="{StaticResource FluentRangeSliderHorizontalRepeatButton}"
 														  Background="{TemplateBinding Background}"
 														  Focusable="False" />
 										</lp:RangeTrack.BackgroundButton>
 
 										<lp:RangeTrack.ForegroundButton>
-											<RepeatButton x:Name="PART_ForegroundButton"
+											<RepeatButton x:Name="Part_ForegroundButton"
 														  Theme="{StaticResource FluentRangeSliderHorizontalRepeatButton}"
 														  Background="{TemplateBinding Foreground}"
 														  Focusable="False" />
 										</lp:RangeTrack.ForegroundButton>
 
 										<lp:RangeTrack.LowerThumb>
-											<Thumb x:Name="PART_LowerThumb"
+											<Thumb x:Name="Part_LowerThumb"
 												   Width="{DynamicResource SliderHorizontalThumbWidth}"
 												   Height="{DynamicResource SliderHorizontalThumbHeight}"
 												   Margin="0"
@@ -182,7 +182,7 @@
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.LowerValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #Part_Track.LowerValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -191,7 +191,7 @@
 										</lp:RangeTrack.LowerThumb>
 
 										<lp:RangeTrack.UpperThumb>
-											<Thumb x:Name="PART_UpperThumb"
+											<Thumb x:Name="Part_UpperThumb"
 												   Width="{DynamicResource SliderHorizontalThumbWidth}"
 												   Height="{DynamicResource SliderHorizontalThumbHeight}"
 												   Margin="0"
@@ -205,7 +205,7 @@
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.UpperValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #Part_Track.UpperValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -271,7 +271,7 @@
 											 Placement="Right"
 											 IsVisible="False"
 											 Fill="{DynamicResource SliderTickBarFill}"/>
-									<lp:RangeTrack x:Name="PART_Track"
+									<lp:RangeTrack x:Name="Part_Track"
 												   Grid.RowSpan="3"
 												   Grid.Column="1"
 												   Grid.ColumnSpan="1"
@@ -283,21 +283,21 @@
 												   Orientation="Vertical"
 												   IsThumbOverlap="{TemplateBinding IsThumbOverlap}">
 										<lp:RangeTrack.BackgroundButton>
-											<RepeatButton x:Name="PART_BackgroundButton"
+											<RepeatButton x:Name="Part_BackgroundButton"
 														  Theme="{StaticResource FluentRangeSliderVerticalRepeatButton}"
 														  Background="{TemplateBinding Background}"
 														  Focusable="False" />
 										</lp:RangeTrack.BackgroundButton>
 
 										<lp:RangeTrack.ForegroundButton>
-											<RepeatButton x:Name="PART_ForegroundButton"
+											<RepeatButton x:Name="Part_ForegroundButton"
 														  Background="{TemplateBinding Foreground}"
 														  Theme="{StaticResource FluentRangeSliderVerticalRepeatButton}"
 														  Focusable="False"/>
 										</lp:RangeTrack.ForegroundButton>
 
 										<lp:RangeTrack.LowerThumb>
-											<Thumb x:Name="PART_LowerThumb"
+											<Thumb x:Name="Part_LowerThumb"
 												   Width="{DynamicResource SliderHorizontalThumbWidth}"
 												   Height="{DynamicResource SliderHorizontalThumbHeight}"
 												   Margin="0"
@@ -311,7 +311,7 @@
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.LowerValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #Part_Track.LowerValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -320,7 +320,7 @@
 										</lp:RangeTrack.LowerThumb>
 
 										<lp:RangeTrack.UpperThumb>
-											<Thumb x:Name="PART_UpperThumb"
+											<Thumb x:Name="Part_UpperThumb"
 												   Width="{DynamicResource SliderHorizontalThumbWidth}"
 												   Height="{DynamicResource SliderHorizontalThumbHeight}"
 												   Margin="0"
@@ -334,7 +334,7 @@
 													<Flyout FlyoutPresenterClasses="ThumbFlyout"
 															Placement="Top"
 															ShowMode="TransientWithDismissOnPointerMoveAway">
-														<TextBlock Text="{Binding #PART_Track.UpperValue, StringFormat='\{0:0\}'}"
+														<TextBlock Text="{Binding #Part_Track.UpperValue, StringFormat='\{0:0\}'}"
 																   HorizontalAlignment="Center"
 																   VerticalAlignment="Center"/>
 													</Flyout>
@@ -373,11 +373,11 @@
 				<Setter Property="Background" Value="{DynamicResource SliderContainerBackgroundPointerOver}" />
 			</Style>
 			
-			<Style Selector="^ /template/ RepeatButton#PART_BackgroundButton">
+			<Style Selector="^ /template/ RepeatButton#Part_BackgroundButton">
 				<Setter Property="Background" Value="{DynamicResource SliderTrackFillPointerOver}" />
 			</Style>
 
-			<Style Selector="^ /template/ RepeatButton#PART_ForegroundButton">
+			<Style Selector="^ /template/ RepeatButton#Part_ForegroundButton">
 				<Setter Property="Background" Value="{DynamicResource SliderTrackValueFillPointerOver}" />
 			</Style>
 		</Style>
@@ -388,22 +388,22 @@
 				<Setter Property="Background" Value="{DynamicResource SliderContainerBackgroundPressed}" />
 			</Style>
 			
-			<Style Selector="^ /template/ RepeatButton#PART_ForegroundButton">
+			<Style Selector="^ /template/ RepeatButton#Part_ForegroundButton">
 				<Setter Property="Background" Value="{DynamicResource SliderTrackValueFillPressed}" />
 			</Style>
 			
-			<Style Selector="^ /template/ RepeatButton#PART_BackgroundButton">
+			<Style Selector="^ /template/ RepeatButton#Part_BackgroundButton">
 				<Setter Property="Background" Value="{DynamicResource SliderTrackFillPressed}" />
 			</Style>
 		</Style>
 
 		<!--  Disabled State  -->
 		<Style Selector="^:disabled">
-			<Style Selector="^ /template/ RepeatButton#PART_ForegroundButton">
+			<Style Selector="^ /template/ RepeatButton#Part_ForegroundButton">
 				<Setter Property="Background" Value="{DynamicResource SliderTrackValueFillDisabled}" />
 			</Style>
 
-			<Style Selector="^ /template/ RepeatButton#PART_BackgroundButton">
+			<Style Selector="^ /template/ RepeatButton#Part_BackgroundButton">
 				<Setter Property="Background" Value="{DynamicResource SliderTrackFillDisabled}" />
 			</Style>
 
